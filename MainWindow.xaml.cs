@@ -24,5 +24,18 @@ namespace WeatherForecast
         {
             InitializeComponent();
         }
+
+        private async void searchForecast_Click(object sender, RoutedEventArgs e)
+        {
+            UserInputAnalyser.City = SearchField.Text;
+            APIHelper.InitialiseClient();
+            DayForecastCreating();
+            
+        }
+
+        private async Task DayForecastCreating()
+        {
+            var dayforecast = await WeatherProcessor.LoadForecast();
+        }
     }
 }

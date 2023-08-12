@@ -34,7 +34,7 @@
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition MaxHeight="80" />
+                <RowDefinition MaxHeight="65" />
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
@@ -47,15 +47,149 @@
                     CornerRadius="25">
                     <DockPanel Margin="10,7,0,7" HorizontalAlignment="Left">
                         <TextBox
+                            x:Name="SearchField"
                             Height="50"
-                            MinWidth="500"
+                            MinWidth="550"
                             Background="#202b3b"
-                            BorderThickness="0" />
+                            BorderThickness="0"
+                            FontSize="20"
+                            Foreground="Beige" />
+                        <Button Content="Search" Click="searchForecast_Click"></Button>
                     </DockPanel>
 
                 </Border>
             </Grid>
+            <Grid Grid.Row="1" />
+            <Grid Grid.Row="2">
+                <Border
+                    Margin="7"
+                    Background="#202b3b"
+                    CornerRadius="25">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition MaxHeight="50" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Margin="0,5,0,0">
+                            <TextBlock
+                                Margin="20,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="19"
+                                Foreground="AliceBlue"
+                                Text="Today's Forecast" />
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <ListBox
+                                Margin="5,0,5,20"
+                                Background="#202b3b"
+                                BorderThickness="0">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="3">
+                <Border
+                    Margin="7"
+                    Background="#202b3b"
+                    CornerRadius="25">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MaxWidth="290" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <WrapPanel
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                Foreground="White"
+                                Text="Вологість:" />
+                            <Label
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                Foreground="White" />
+                        </WrapPanel>
+                        <WrapPanel
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                Foreground="White"
+                                Text="Ймовірність дощу:" />
+                            <Label
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                Foreground="White" />
+                        </WrapPanel>
+                        <WrapPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                Foreground="White"
+                                Text="Тиск:" />
+                            <Label
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                Foreground="White" />
+                        </WrapPanel>
+                        <WrapPanel
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                Foreground="White"
+                                Text="Напрямок вітру:" />
+                            <Label
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="30"
+                                Foreground="White" />
+                        </WrapPanel>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
-        <Grid Grid.Column="2" />
+        <Grid Grid.Column="2">
+            <Border Background="#202b3b" Margin="10" CornerRadius="25">
+                <WrapPanel Orientation="Vertical">
+                    <Grid>
+                        <TextBlock FontSize="30" Foreground="White">Day 1</TextBlock>
+                    </Grid>
+                    <Grid>
+                        <TextBlock FontSize="30" Foreground="White"> Day 2</TextBlock>
+                    </Grid>
+                    <Grid>
+                        <TextBlock FontSize="30" Foreground="White"> Day 3</TextBlock>
+                    </Grid>
+                </WrapPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
