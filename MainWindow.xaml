@@ -11,30 +11,52 @@
     Background="#0b131e"
     mc:Ignorable="d">
     <Window.Resources>
-        <local:ListBoxItemIndexConverter x:Key="IndexToListItemConverter"/>
+        <local:ListBoxItemIndexConverter x:Key="IndexToListItemConverter" />
         <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
                         <StackPanel MinWidth="150" MinHeight="150">
-                            <TextBlock Text="{Binding Date}" FontSize="20" Margin="0 5 0 10" HorizontalAlignment="Center" Foreground="White"/>
+                            <TextBlock
+                                Margin="0,5,0,10"
+                                HorizontalAlignment="Center"
+                                FontSize="20"
+                                Foreground="White"
+                                Text="{Binding Date}" />
                             <Grid Height="105">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Row="0"/>
-                                <Label Grid.Row="1" Content="{Binding DayData.DayCondition.Condition}"  Foreground="White" FontSize="17"/>
+                                <Image
+                                    Grid.Row="0"
+                                    MaxWidth="60"
+                                    MaxHeight="60"
+                                    Source="{Binding DayData.DayCondition.imageUrl}" />
+                                <Label
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Center"
+                                    Content="{Binding DayData.DayCondition.Condition}"
+                                    FontSize="17"
+                                    Foreground="White" />
                                 <Grid Grid.Row="2" HorizontalAlignment="Center">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Border BorderThickness="0 0 1 0" BorderBrush="White">
-                                        <Label Content="{Binding DayData.mintemp_c}" Grid.Column="0" Foreground="White" FontSize="17"/>
+                                    <Border BorderBrush="White" BorderThickness="0,0,1,0">
+                                        <Label
+                                            Grid.Column="0"
+                                            Content="{Binding DayData.mintemp_c}"
+                                            FontSize="17"
+                                            Foreground="White" />
                                     </Border>
-                                    <Label Content="{Binding DayData.maxtemp_c}" Grid.Column="2" Foreground="White" FontSize="17" />
+                                    <Label
+                                        Grid.Column="2"
+                                        Content="{Binding DayData.maxtemp_c}"
+                                        FontSize="17"
+                                        Foreground="White" />
                                 </Grid>
                             </Grid>
                         </StackPanel>
@@ -42,6 +64,19 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="SomeButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -51,8 +86,8 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition MaxHeight="65" />
-                <RowDefinition MaxHeight="200"/>
-                <RowDefinition MaxHeight="200"/>
+                <RowDefinition MaxHeight="200" />
+                <RowDefinition MaxHeight="200" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -61,21 +96,64 @@
                     Margin="5"
                     Background="#202b3b"
                     CornerRadius="25">
-                    <DockPanel Margin="10,7,0,7" HorizontalAlignment="Left">
+                    <DockPanel Margin="10,7,0,7">
                         <TextBox
                             x:Name="SearchField"
                             Height="50"
                             MinWidth="550"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
                             Background="#202b3b"
                             BorderThickness="0"
                             FontSize="20"
                             Foreground="Beige" />
-                        <Button Content="Search" Click="searchForecast_Click"></Button>
+                        <Button
+                            Width="45"
+                            BorderThickness="0"
+                            Click="searchForecast_Click"
+                            Style="{StaticResource SomeButtonStyle}">
+                            <Button.Background>
+                                <ImageBrush ImageSource="/icons8_search_500px.png" />
+                            </Button.Background>
+                        </Button>
                     </DockPanel>
 
                 </Border>
             </Grid>
-            <Grid Grid.Row="1" />
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border
+                    Grid.Row="0"
+                    Background="Blue"
+                    CornerRadius="25 25 0 0">
+                    <TextBlock
+                        Margin="15"
+                        HorizontalAlignment="Center"
+                        Background="Blue"
+                        FontSize="50"
+                        FontStyle="Italic"
+                        FontWeight="SemiBold"
+                        Foreground="Yellow"
+                        Text="Слава Україні!" />
+                </Border>
+                <Border
+                    Grid.Row="1"
+                    Background="Yellow"
+                    CornerRadius="0 0 25 25">
+                    <TextBlock
+                        Margin="15"
+                        HorizontalAlignment="Center"
+                        Background="Yellow"
+                        FontSize="50"
+                        FontStyle="Italic"
+                        FontWeight="SemiBold"
+                        Foreground="Blue"
+                        Text="Героям Слава!" />
+                </Border>
+            </Grid>
             <Grid Grid.Row="3">
                 <Border
                     Margin="7"
@@ -97,17 +175,17 @@
                         </Grid>
                         <Grid Grid.Row="1" MaxWidth="550">
                             <ListBox
+                                Name="DaysListBox"
                                 Margin="5,0,5,20"
                                 Background="#202b3b"
-                                BorderThickness="0"
-                                Name="DaysListBox">
+                                BorderThickness="0" SelectionChanged="ForecastListBoxSelectionChanged">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                                        <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal" />
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                                 <ListBox.ItemContainerStyle>
-                                    <Style BasedOn="{StaticResource ListBoxItemStyle}" TargetType="ListBoxItem"/>
+                                    <Style BasedOn="{StaticResource ListBoxItemStyle}" TargetType="ListBoxItem" />
                                 </ListBox.ItemContainerStyle>
                             </ListBox>
                         </Grid>
@@ -156,6 +234,7 @@
                                 Foreground="White"
                                 Text="Ймовірність дощу:" />
                             <Label
+                                Name="RainProbability"
                                 Margin="10,0,0,0"
                                 VerticalAlignment="Center"
                                 FontSize="30"
@@ -172,6 +251,7 @@
                                 Foreground="White"
                                 Text="Тиск:" />
                             <Label
+                                Name="Pressure"
                                 Margin="10,0,0,0"
                                 VerticalAlignment="Center"
                                 FontSize="30"
@@ -186,8 +266,9 @@
                                 VerticalAlignment="Center"
                                 FontSize="30"
                                 Foreground="White"
-                                Text="Напрямок вітру:" />
+                                Text="Швидкість вітру:" />
                             <Label
+                                Name="WindSpeed"
                                 Margin="10,0,0,0"
                                 VerticalAlignment="Center"
                                 FontSize="30"
@@ -198,19 +279,98 @@
             </Grid>
         </Grid>
         <Grid Grid.Column="2">
-            <Border Background="#202b3b" Margin="10" CornerRadius="25">
-                <WrapPanel Orientation="Vertical">
-                    <Grid>
-                        <TextBlock FontSize="30" Foreground="White">Day 1</TextBlock>
+            <Border
+                Margin="10"
+                Background="#202b3b"
+                CornerRadius="25">
+                <Grid Name="SelectedGrid" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="60" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <WrapPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock
+                            Margin="20,15,0,0"
+                            FontSize="30"
+                            Foreground="White"
+                            Text="Forecast for:" />
+                        <TextBlock
+                            Margin="20,15,0,0"
+                            FontSize="30"
+                            Foreground="White"
+                            Name="selectedDayDate" />
+                    </WrapPanel>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <WrapPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock
+                                FontSize="30"
+                                Foreground="White"
+                                Text="Average humidity:" />
+                            <TextBlock
+                                FontSize="30"
+                                Foreground="White"
+                                Name="SelectedDayHumidity" />
+                        </WrapPanel>
+                        <WrapPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock
+                                FontSize="30"
+                                Foreground="White"
+                                Text="Minimal temperature:" />
+                            <TextBlock
+                                FontSize="30"
+                                Foreground="White"
+                                Name="SelectedDayMinTemperature" />
+                        </WrapPanel>
+                        <WrapPanel Grid.Row="2" Orientation="Horizontal">
+                            <TextBlock
+                                FontSize="30"
+                                Foreground="White"
+                                Text="Maximal temperature:" />
+                            <TextBlock
+                                FontSize="30"
+                                Foreground="White"
+                                Name="SelectedDayMaxTemperature" />
+                        </WrapPanel>
+                        <WrapPanel Grid.Row="3" Orientation="Horizontal">
+                            <TextBlock
+                                FontSize="30"
+                                Foreground="White"
+                                Text="Possibility of rain:" />
+                            <TextBlock
+                                FontSize="30"
+                                Foreground="White"
+                                Name="SelectedDayRainPos" />
+                        </WrapPanel>
+                        <WrapPanel Grid.Row="4" Orientation="Horizontal">
+                            <TextBlock
+                                FontSize="30"
+                                Foreground="White"
+                                Text="Condition:" />
+                            <TextBlock
+                                FontSize="30"
+                                Foreground="White"
+                                Name="SelectedDayCondition" />
+                        </WrapPanel>
                     </Grid>
-                    <Grid>
-                        <TextBlock FontSize="30" Foreground="White"> Day 2</TextBlock>
-                    </Grid>
-                    <Grid>
-                        <TextBlock FontSize="30" Foreground="White"> Day 3</TextBlock>
-                    </Grid>
-                </WrapPanel>
+                </Grid>
             </Border>
+            <TextBlock
+                Name="EmptyNotificator"
+                MaxWidth="500"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="40"
+                Foreground="White"
+                Text="You haven't chosen a city for your forecast"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
         </Grid>
     </Grid>
 </Window>

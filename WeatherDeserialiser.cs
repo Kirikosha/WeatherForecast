@@ -18,7 +18,6 @@ namespace WeatherForecast
                 RootContainer rootData = (RootContainer)serialiser.Deserialize(reader);
                 if(rootData != null && rootData.ForecastData.ForecastDays.Length > 0)
                 {
-                    Console.WriteLine(rootData.ForecastData.ForecastDays[0].DayData.avghumidity);
                     return rootData;
                 }
                 else

@@ -8,8 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="data\IconsUI\icons8_search_500px.png" />
+    <None Remove="icons8_search_500px.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="data\IconsUI\icons8_search_500px.png" />
+    <Resource Include="icons8_search_500px.png" />
   </ItemGroup>
 
 </Project>

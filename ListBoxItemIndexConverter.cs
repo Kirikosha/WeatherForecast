@@ -13,7 +13,7 @@ namespace WeatherForecast
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is IList Days && parameter is int index && index >=0 && index < Days.Count)
+            if (value is IList Days && parameter is int index && index >= 0 && index < Days.Count)
             {
                 return Days[index];
             }

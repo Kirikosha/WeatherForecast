@@ -20,7 +20,7 @@ namespace WeatherForecast
                 }
                 value = value.Trim();
                 value = value.ToLower();
-                city = value;
+                city = char.ToUpper(value[0]) + value.Substring(1);
             }
         }
     }
